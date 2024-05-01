@@ -44,7 +44,8 @@ class Token(BaseModel):
   token_type: str
 
 class TokenData(BaseModel):
-  id: Optional[int] = None
+  id: int
+  username: str
 
 class Vote(BaseModel):
   post_id: int

@@ -23,10 +23,11 @@ def verify_access_token(token: str, credentials_exception):
   try:
     payload = jwt.decode(token, SECRET_KEY, algorithms = [ALGORITHM])
     id: int = payload.get("user_id")
+    username: str = payload.get("username")
 
-    if id is None:
+    if (id is None) or (username is None):
       raise credentials_exception
-    token_data = schemas.TokenData(id = id)
+    token_data = schemas.TokenData(id = id, username = username)
   except JWTError:
     raise credentials_exception
   return token_data
